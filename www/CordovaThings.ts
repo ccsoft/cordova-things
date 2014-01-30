@@ -6,8 +6,7 @@ module CC {
                 return;
             }
             (<any>window).cordova.exec(
-                (response) => {
-                    console.log("getAppVersion call successful " + response);
+                (response) => {                    
                     successcb(response);
                 },
                 (err) => {

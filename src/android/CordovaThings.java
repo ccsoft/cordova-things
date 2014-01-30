@@ -5,6 +5,8 @@ import org.apache.cordova.CordovaPlugin;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
 
 public class CordovaThings extends CordovaPlugin {
@@ -17,8 +19,15 @@ public class CordovaThings extends CordovaPlugin {
     	Log.i(TAG, "action:" + action);
 
     	if (action.equals("getAppVersion")) {
-    		PackageInfo pInfo = cordova.getActivity().getPackageManager().getPackageInfo(cordova.getActivity().getPackageName(), 0);
-			callbackContext.success(pInfo.versionName);
+    		PackageInfo pInfo;
+			try {
+				pInfo = cordova.getActivity().getPackageManager().getPackageInfo(cordova.getActivity().getPackageName(), 0);
+				callbackContext.success(pInfo.versionName);
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+				callbackContext.error("exception");
+			}
+			
 			return true;
     	}      	
     	

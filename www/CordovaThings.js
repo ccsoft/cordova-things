@@ -10,7 +10,6 @@ var CC;
                 return;
             }
             window.cordova.exec(function (response) {
-                console.log("getAppVersion call successful " + response);
                 successcb(response);
             }, function (err) {
                 console.log("getAppVersion call failed with error: " + err);
