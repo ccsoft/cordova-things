@@ -1,3 +1,4 @@
+/// <reference path="cordovathings.d.ts"/>
 var CC;
 (function (CC) {
     var CordovaThings = (function () {
@@ -16,6 +17,21 @@ var CC;
                 if (failcb)
                     failcb(err);
             }, "CordovaThings", "getAppVersion", []);
+        };
+
+        CordovaThings.prototype.setKeyValue = function (key, value, successcb, failcb) {
+            if (!window.cordova) {
+                if (failcb)
+                    failcb("no cordova");
+                return;
+            }
+            window.cordova.exec(function (response) {
+                successcb();
+            }, function (err) {
+                console.log("setKeyValue call failed with error: " + err);
+                if (failcb)
+                    failcb(err);
+            }, "CordovaThings", "setKeyValue", [key, value]);
         };
         return CordovaThings;
     })();
