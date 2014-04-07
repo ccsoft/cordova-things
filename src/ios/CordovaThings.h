@@ -6,5 +6,8 @@
 }
 
 - (void) getAppVersion:(CDVInvokedUrlCommand*)command;
+- (void) setKeyValue:(CDVInvokedUrlCommand*)command;
+
++ (NSString*) getValueFor:(NSString*)key;
 
 @end
