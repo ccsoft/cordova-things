@@ -24,7 +24,7 @@ module CC {
             }
             (<any>window).cordova.exec(
                 (response) => {
-                    successcb();
+                    if(successcb) successcb();
                 },
                 (err) => {
                     console.log("setKeyValue call failed with error: " + err);
