@@ -22,6 +22,10 @@ public class CordovaThings extends CordovaPlugin {
 		return keyValueStore.get(key);
 	}
 	
+	public static String setValueForKey(String key,String value) {
+		return keyValueStore.put(key, value);
+	}
+	
     @Override
     public boolean execute(String action, JSONArray args,
 			final CallbackContext callbackContext) throws JSONException {
@@ -47,6 +51,16 @@ public class CordovaThings extends CordovaPlugin {
 				return true;
 			}
     	}
+    	
+    	if (action.equals("getKeyValue")) {
+			try {
+				String value = keyValueStore.get(args.getString(0));
+				callbackContext.success(value);
+			} catch (Exception e) {
+				e.printStackTrace();
+				callbackContext.error("exception");
+			}
+		}
     	
         return false;
     }
