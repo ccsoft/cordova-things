@@ -33,6 +33,21 @@ var CC;
                     failcb(err);
             }, "CordovaThings", "setKeyValue", [key, value]);
         };
+        
+        CordovaThings.prototype.getKeyValue = function (key, successcb, failcb) {
+            if (!window.cordova) {
+                if (failcb)
+                    failcb("no cordova");
+                return;
+            }
+            window.cordova.exec(function (response) {
+                successcb(response);
+            }, function (err) {
+                console.log("getKeyValue call failed with error: " + err);
+                if (failcb)
+                    failcb(err);
+            }, "CordovaThings", "getKeyValue", [key]);
+        };
         return CordovaThings;
     })();
     CC.CordovaThings = CordovaThings;
