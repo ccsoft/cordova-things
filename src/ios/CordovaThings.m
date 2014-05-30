@@ -1,6 +1,9 @@
 #import "CordovaThings.h"
 #import <Cordova/CDV.h>
 
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
 static NSMutableDictionary *CordovaThingsDictionary;
 
 @implementation CordovaThings
@@ -27,8 +30,15 @@ static NSMutableDictionary *CordovaThingsDictionary;
 }
 
 - (void)setStatusBarVisibility:(CDVInvokedUrlCommand *)command
-{   
-    NSString* action = [command argumentAtIndex:0];
+{
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        NSString* action = [command argumentAtIndex:0];
+        if([action isEqualToString:@"hide"]) {
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+        } else {
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+        }
+    }
 
 	CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@""];
     [self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
