@@ -7,6 +7,7 @@
 
 - (void) getAppVersion:(CDVInvokedUrlCommand*)command;
 - (void) setKeyValue:(CDVInvokedUrlCommand*)command;
+- (void) setStatusBarVisibility:(CDVInvokedUrlCommand*)command;
 
 + (NSString*) getValueFor:(NSString*)key;
 

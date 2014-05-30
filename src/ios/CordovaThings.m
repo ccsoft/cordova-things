@@ -26,6 +26,14 @@ static NSMutableDictionary *CordovaThingsDictionary;
     [self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
 }
 
+- (void)setStatusBarVisibility:(CDVInvokedUrlCommand *)command
+{   
+    NSString* action = [command argumentAtIndex:0];
+
+	CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@""];
+    [self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+}
+
 + (NSString*)getValueFor:(NSString *)key
 {
     if (CordovaThingsDictionary == nil) return nil;

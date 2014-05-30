@@ -26,12 +26,23 @@ var CC;
                 return;
             }
             window.cordova.exec(function (response) {
-                successcb();
+                if (successcb)
+                    successcb();
             }, function (err) {
                 console.log("setKeyValue call failed with error: " + err);
                 if (failcb)
                     failcb(err);
             }, "CordovaThings", "setKeyValue", [key, value]);
+        };
+
+        CordovaThings.prototype.setStatusBarVisibility = function (action) {
+            if (!window.cordova) {
+                return;
+            }
+            window.cordova.exec(function (response) {
+            }, function (err) {
+                console.log("setStatusBarVisibility call failed with error: " + err);
+            }, "CordovaThings", "setStatusBarVisibility", [action]);
         };
         return CordovaThings;
     })();

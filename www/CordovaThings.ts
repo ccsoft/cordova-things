@@ -31,6 +31,19 @@ module CC {
                     if (failcb) failcb(err);
                 }, "CordovaThings", "setKeyValue", [key, value]);
         } 
+
+        setStatusBarVisibility(action: string) {
+            if (!(<any>window).cordova) {
+                return;
+            }
+            (<any>window).cordova.exec(
+                (response) => {
+                    
+                },
+                (err) => {
+                    console.log("setStatusBarVisibility call failed with error: " + err);
+                }, "CordovaThings", "setStatusBarVisibility", [action]);
+        } 
     }
 }
 declare var module;

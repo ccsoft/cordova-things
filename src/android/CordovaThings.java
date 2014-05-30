@@ -48,6 +48,10 @@ public class CordovaThings extends CordovaPlugin {
 			}
     	}
     	
+    	if (action.equals("setStatusBarVisibility")) { // ignore for android
+    		return true;
+    	}
+    	
         return false;
     }
 }
